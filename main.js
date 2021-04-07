@@ -61,6 +61,23 @@ function handleWindowLoad() {
     var addBtn = addDataContainer.lastElementChild;
 
     addBtn.addEventListener('click', handleAddBtnClick);
+
+    var editDataContainer = document.getElementById("editData");
+    var editBtn = editDataContainer.lastElementChild;
+    
+    editBtn.addEventListener('click', handleEditBtnClick);
+}
+
+function handleEditBtnClick() {
+    var index = document.getElementById('editData').children[0].value;
+    var text = document.getElementById('editData').children[1].value;
+    
+    var oldArray = readArrayFromLS();
+    oldArray[index] = text;
+    localStorage.setItem('items', JSON.stringify(oldArray));
+    
+    var newArray = readArrayFromLS();
+    updateUI(newArray);
 }
 
 window.addEventListener('load', handleWindowLoad);
