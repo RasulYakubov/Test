@@ -66,6 +66,37 @@ function handleWindowLoad() {
     var editBtn = editDataContainer.lastElementChild;
     
     editBtn.addEventListener('click', handleEditBtnClick);
+
+    var deleteDataContainer = document.getElementById('deleteData');
+    var deleteBtn = deleteDataContainer.lastElementChild;
+
+    deleteBtn.addEventListener('click', handleDeleteBtnClick);
+
+    loadData();
+}
+
+function handleDeleteBtnClick() {
+    var deleteDataContainer = document.getElementById('deleteData');
+    
+    var index = deleteDataContainer.children[0].value;
+
+    var oldArray = readArrayFromLS();
+
+    if (index == 0) {
+        oldArray.shift();
+    } else {
+        oldArray.pop();
+    }
+
+    localStorage.setItem('items', JSON.stringify(oldArray));
+    
+    var newArray = readArrayFromLS();
+    updateUI(newArray);
+}
+
+function loadData() {
+    var array = readArrayFromLS();
+    updateUI(array);
 }
 
 function handleEditBtnClick() {
