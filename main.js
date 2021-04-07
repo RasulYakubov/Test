@@ -3,6 +3,31 @@ function handleAddBtnClick() {
     var inputElement = addDataContainer.firstElementChild;
 
     var inputValue = inputElement.value;
+    updateUIAndLS(inputValue);
+}
+
+function updateUIAndLS(value) {
+    var updatedArray = updateLS(value);
+    updateUI(updatedArray);
+}
+
+function updateLS(newValue) {
+    writeToLS(newValue);
+    var result = readArrayFromLS();
+
+    return result;
+}
+
+function updateUI(array) {
+    clearUI();
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        render(element);
+    }
+} 
+
+function clearUI() {
+    document.getElementById('container').innerHTML = '';
 }
 
 function render(item) {
